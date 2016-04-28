@@ -33,13 +33,13 @@ public class MessagesActivity extends AppCompatActivity {
 
         Button searchButton = (Button) findViewById(R.id.buttonRefresh);
         final TextView textView   = (TextView) findViewById(R.id.usernameText);
-        messageListView = (ListView) findViewById(R.id.listView);
+        messageListView = (ListView) findViewById(R.id.listView2);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 messageList = new ArrayList<Message>();
-                 messageListView.setAdapter(null);
+                messageListView.setAdapter(null);
 
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -67,9 +67,9 @@ public class MessagesActivity extends AppCompatActivity {
                     }
                 };
                 Map<String ,String > parameters = new HashMap<String, String>();
-                String nameEntered = textView.getText().toString();
-                Log.d("test", nameEntered);
-                parameters.put("u", nameEntered);
+                //String nameEntered = textView.getText().toString();
+                //Log.d("test", nameEntered);
+                //parameters.put("u", nameEntered);
                 CustomStringRequest request = new CustomStringRequest(parameters, "http://openexport.esy.es/json.php", responseListener);
                 RequestQueue queue = Volley.newRequestQueue(MessagesActivity.this);
                 queue.add(request);
@@ -88,10 +88,14 @@ public class MessagesActivity extends AppCompatActivity {
                 view = getLayoutInflater().inflate(R.layout.message_layout, parent, false);
             Message user = messageList.get(position);
             TextView name = (TextView) view.findViewById(R.id.textMessage);
-            name.setText(user.getText());
+            name.setText(user.getMessage());
 
             TextView username = (TextView) view.findViewById(R.id.textSender);
             username.setText(user.getSender());
+
+            view.setBackgroundColor(0xFFDED2BE);
+
+
 
             return view;
         }

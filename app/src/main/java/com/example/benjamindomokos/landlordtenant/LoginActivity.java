@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText username = (EditText) findViewById(R.id.usernameText);
         final EditText pwd = (EditText) findViewById(R.id.passwordText);
         final TextView register = (TextView) findViewById(R.id.registerText);
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,27 +56,32 @@ public class LoginActivity extends AppCompatActivity {
                             boolean registerSuccess = registerResponse.getBoolean("success");
                             boolean userIsInGroup = registerResponse.getBoolean("group");
                             int userType = registerResponse.getInt("type");
+                            int groupId = registerResponse.getInt("gr_id");
+                            int id = registerResponse.getInt("id");
+                            Log.d("group  id:", id+" "+groupId);
 
                             if(registerSuccess & userIsInGroup){
                                 if(userType == 0) {
                                     Intent intent = new Intent(LoginActivity.this, LandlordAreaActivity.class);
-                                    intent.putExtra("id",registerResponse.getInt("id"));
-                                    //intent.putExtra("group",registerResponse.getInt("gr_id"));
+                                    Bundle extras = new Bundle();
+                                    extras.putInt("id",registerResponse.getInt("id"));
+                                    extras.putInt("group",registerResponse.getInt("gr_id"));
+                                    intent.putExtras(extras);
                                     LoginActivity.this.startActivity(intent);
                                 }else{
                                     Intent intent = new Intent(LoginActivity.this, TenantAreaActivity.class);
-                                    intent.putExtra("details",response);
+                                    //intent.putExtra("details",response);
                                     LoginActivity.this.startActivity(intent);
                                 }
                             }else if(!userIsInGroup) {
                                 if(userType == 0) {
                                     Intent intent = new Intent(LoginActivity.this, CreateGroupActivity.class);
-                                    intent.putExtra("id",registerResponse.getInt("id"));
+                                    //intent.putExtra("id",registerResponse.getInt("id"));
                                     //intent.putExtra("group",registerResponse.getInt("group"));
                                     LoginActivity.this.startActivity(intent);
                                 }else{
                                     Intent intent = new Intent(LoginActivity.this, PreTenantAreaActivity.class);
-                                    intent.putExtra("details",response);
+                                    //intent.putExtra("details",response);
                                     LoginActivity.this.startActivity(intent);
 
                                 }

@@ -33,6 +33,7 @@
             android:id="@+id/textMessage"
             android:layout_below="@+id/textSender"
             android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/textTime"
             android:layout_alignEnd="@+id/textTime" />
     </RelativeLayout>
 </LinearLayout>

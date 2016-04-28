@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -31,7 +30,7 @@ public class TenantSearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_landlord_area);
+        setContentView(R.layout.activity_tenant_search);
 
         Button searchButton = (Button) findViewById(R.id.searchButton);
         final TextView textView   = (TextView) findViewById(R.id.usernameText);
