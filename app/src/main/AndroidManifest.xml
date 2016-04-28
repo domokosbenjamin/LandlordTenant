@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.benjamindomokos.landlordtenant">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".TenantSearchActivity" />
+        <activity android:name=".LandlordAreaActivity" />
+        <activity android:name=".MessagesActivity" />
+        <activity android:name=".DisplayListActivity" />
+        <activity android:name=".ComplexMessageActivity" />
+        <activity android:name=".CreateGroupActivity" />
+        <activity android:name=".PreTenantAreaActivity" />
+        <activity android:name=".TenantAreaActivity"></activity>
+    </application>
+
+</manifest>
