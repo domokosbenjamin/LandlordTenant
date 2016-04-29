@@ -11,6 +11,7 @@ public class User {
         username = username1;
     }
 
+
     //getters
     public String getFirstname(){
         return firstname;
