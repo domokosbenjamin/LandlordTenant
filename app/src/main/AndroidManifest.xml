@@ -21,7 +21,6 @@
         <activity android:name=".TenantSearchActivity" />
         <activity android:name=".LandlordAreaActivity" />
         <activity android:name=".MessagesActivity" />
-        <activity android:name=".DisplayListActivity" />
         <activity android:name=".ComplexMessageActivity" />
         <activity android:name=".CreateGroupActivity" />
         <activity android:name=".PreTenantAreaActivity" />
