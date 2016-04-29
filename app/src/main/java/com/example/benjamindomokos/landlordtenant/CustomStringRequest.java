@@ -15,8 +15,6 @@ public class CustomStringRequest extends StringRequest {
         super(Method.POST,registerUrl,listener,null);
         //storing parameters to be passed
         params = parameters;
-
-
     }
 
     @Override

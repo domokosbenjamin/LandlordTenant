@@ -62,9 +62,6 @@ public class LoginActivity extends AppCompatActivity {
                             boolean registerSuccess = loginResponse.getBoolean("success");
                             boolean userIsInGroup = loginResponse.getBoolean("group");
                             int userType = loginResponse.getInt("type");
-                            int groupId = loginResponse.getInt("gr_id");
-                            int id = loginResponse.getInt("id");
-                            //Log.d("group  id:", id+" "+groupId+" "+userType);
 
                             //if the user is registered and is part of a group
                             if(registerSuccess & userIsInGroup){
@@ -74,8 +71,9 @@ public class LoginActivity extends AppCompatActivity {
                                     Intent intent = new Intent(LoginActivity.this, TenantAreaActivity.class);
                                     Bundle extras = new Bundle();
                                     extras.putInt("id", loginResponse.getInt("id"));
-                                    extras.putInt("group", loginResponse.getInt("gr_id"));
                                     extras.putString("name", loginResponse.getString("name"));
+                                    extras.putInt("group", loginResponse.getInt("gr_id"));
+
                                     intent.putExtras(extras);
                                     LoginActivity.this.startActivity(intent);
                                 }
@@ -85,8 +83,9 @@ public class LoginActivity extends AppCompatActivity {
                                     Intent intent = new Intent(LoginActivity.this, LandlordAreaActivity.class);
                                     Bundle extras = new Bundle();
                                     extras.putInt("id", loginResponse.getInt("id"));
-                                    extras.putInt("group", loginResponse.getInt("gr_id"));
                                     extras.putString("name", loginResponse.getString("name"));
+                                    extras.putInt("group", loginResponse.getInt("gr_id"));
+
                                     intent.putExtras(extras);
                                     LoginActivity.this.startActivity(intent);
                                 }
@@ -94,17 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                                 //else if the user is not in a group
                             }else if(!userIsInGroup) {
                                 //if the user is a landloard
-                                if(userType == 0) {
-                                    //start activity to let the user create a group
-                                    Intent intent = new Intent(LoginActivity.this, CreateGroupActivity.class);
-                                    Bundle extras = new Bundle();
-                                    //passing through the data about the user
-                                    extras.putInt("id", loginResponse.getInt("id"));
-                                    extras.putInt("group", loginResponse.getInt("gr_id"));
-                                    extras.putString("name", loginResponse.getString("name"));
-                                    intent.putExtras(extras);
-                                    LoginActivity.this.startActivity(intent);
-                                }else{
+                                if(userType == 1) {
+
                                     //if the user is a tenant, start activity to display a message to the user
                                     Intent intent = new Intent(LoginActivity.this, PreTenantAreaActivity.class);
                                     LoginActivity.this.startActivity(intent);

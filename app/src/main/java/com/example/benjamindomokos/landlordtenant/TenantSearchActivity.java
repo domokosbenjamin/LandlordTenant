@@ -46,7 +46,29 @@ public class TenantSearchActivity extends AppCompatActivity {
         userListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(TenantSearchActivity.this, "You Clicked at " +userList.get(position).getUsername()+" "+extras.getInt("group"), Toast.LENGTH_SHORT).show();
+                String user = userList.get(position).getUsername();
+                Toast.makeText(TenantSearchActivity.this, "You added " +user, Toast.LENGTH_SHORT).show();
+
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                };
+
+                //creating a hash map to post data to php script
+                Map<String, String> parameters = new HashMap<String, String>();
+                //putting the data in the hashmap
+
+                parameters.put("group", extras.getInt("group") + "");
+                parameters.put("username", user );
+
+                //new custom string request
+                CustomStringRequest request = new CustomStringRequest(parameters, "http://openexport.esy.es/add_user.php", responseListener);
+                //new request queue to hold the requests
+                RequestQueue queue = Volley.newRequestQueue(TenantSearchActivity.this);
+                //adding the request to the request queue
+                queue.add(request);
             }
 
 
