@@ -12,7 +12,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/textMessage"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/buttonSend"
@@ -32,7 +32,8 @@
         android:id="@+id/listView2"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/buttonRefresh" />
+        android:layout_above="@+id/buttonRefresh"
+        android:foregroundGravity="bottom" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -40,6 +41,6 @@
         android:layout_height="wrap_content"
         android:text="Refresh"
         android:id="@+id/buttonRefresh"
-        android:layout_above="@+id/editText"
+        android:layout_above="@+id/textMessage"
         android:layout_alignParentEnd="true" />
 </RelativeLayout>

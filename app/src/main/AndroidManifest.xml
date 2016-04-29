@@ -25,7 +25,8 @@
         <activity android:name=".ComplexMessageActivity" />
         <activity android:name=".CreateGroupActivity" />
         <activity android:name=".PreTenantAreaActivity" />
-        <activity android:name=".TenantAreaActivity"></activity>
+        <activity android:name=".TenantAreaActivity" />
+        <activity android:name=".DisplayComplexMessages"></activity>
     </application>
 
 </manifest>

@@ -14,8 +14,9 @@
         android:layout_height="wrap_content"
         android:text="Maintainance Requests"
         android:id="@+id/buttonMaintainance"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="177dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -41,32 +42,38 @@
         android:layout_below="@+id/buttonReminder"
         android:layout_centerHorizontal="true" />
 
-    <LinearLayout
-        android:orientation="vertical"
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add user"
+        android:id="@+id/buttonAddUser"
+        android:layout_below="@+id/buttonMessages"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Main Landlord Area"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/buttonMaintainance" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="1">
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
 
         <ImageView
-            android:layout_width="41dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
             android:id="@+id/imageView"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="66dp"
-            android:layout_weight="0.09"
-            android:layout_gravity="center_horizontal" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textView"
-            android:layout_below="@+id/imageView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="44dp"
-            android:layout_gravity="center_horizontal" />
-    </LinearLayout>
+            android:layout_marginTop="57dp"
+            android:src="@drawable/c2c8465ce02042f2a5f915fbef5f1264"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentStart="false" />
+    </RelativeLayout>
 
 </RelativeLayout>

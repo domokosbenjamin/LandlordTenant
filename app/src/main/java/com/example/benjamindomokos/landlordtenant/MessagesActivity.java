@@ -1,5 +1,8 @@
 package com.example.benjamindomokos.landlordtenant;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -32,8 +36,43 @@ public class MessagesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_messages);
 
         Button searchButton = (Button) findViewById(R.id.buttonRefresh);
-        final TextView textView   = (TextView) findViewById(R.id.usernameText);
+        Button sendButton = (Button) findViewById(R.id.buttonSend);
+        final TextView textView   = (TextView) findViewById(R.id.textMessage);
         messageListView = (ListView) findViewById(R.id.listView2);
+
+        //final Bundle extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
+        final int group = extras.getInt("group");
+        final String name = extras.getString("name");
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getApplicationContext();
+                CharSequence text = name+group+"";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                };
+
+                Map<String, String > parameters = new HashMap<String, String>();
+                parameters.put("sender",name);
+                parameters.put("group",group+"");
+                parameters.put("message",textView.getText().toString());
+
+
+                CustomStringRequest loginRequest = new CustomStringRequest(parameters, "http://openexport.esy.es/postmessage.php",responseListener);
+                RequestQueue queue = Volley.newRequestQueue(MessagesActivity.this);
+                queue.add(loginRequest);
+            }
+        });
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,12 +90,12 @@ public class MessagesActivity extends AppCompatActivity {
                             array = json.getJSONArray("value");
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject user = array.getJSONObject(i);
-                                String firstname = user.getString("firstname");
-                                String lastname = user.getString("lastname");
-                                String username = user.getString("username");
+                                String sender = user.getString("sender");
+                                String time = user.getString("time");
+                                String message = user.getString("message");
 
-                                messageList.add(new Message(firstname, lastname, username));
-                                Log.d("added", firstname + lastname + username);
+                                messageList.add(new Message(sender, time, message));
+                               // Log.d("added", firstname + lastname + username);
 
                             }
                             MessageListAdapter adapter = new MessageListAdapter();
@@ -67,10 +106,9 @@ public class MessagesActivity extends AppCompatActivity {
                     }
                 };
                 Map<String ,String > parameters = new HashMap<String, String>();
-                //String nameEntered = textView.getText().toString();
-                //Log.d("test", nameEntered);
-                //parameters.put("u", nameEntered);
-                CustomStringRequest request = new CustomStringRequest(parameters, "http://openexport.esy.es/json.php", responseListener);
+
+                parameters.put("group", group+"");
+                CustomStringRequest request = new CustomStringRequest(parameters, "http://openexport.esy.es/getmessages.php", responseListener);
                 RequestQueue queue = Volley.newRequestQueue(MessagesActivity.this);
                 queue.add(request);
             }
@@ -90,10 +128,14 @@ public class MessagesActivity extends AppCompatActivity {
             TextView name = (TextView) view.findViewById(R.id.textMessage);
             name.setText(user.getMessage());
 
-            TextView username = (TextView) view.findViewById(R.id.textSender);
-            username.setText(user.getSender());
+            TextView sender = (TextView) view.findViewById(R.id.textSender);
+            sender.setText(user.getSender());
 
-            view.setBackgroundColor(0xFFDED2BE);
+
+            TextView time = (TextView) view.findViewById(R.id.textTime);
+            time.setText(user.getTime());
+
+            //view.setBackgroundColor(0xFFDED2BE);
 
 
 

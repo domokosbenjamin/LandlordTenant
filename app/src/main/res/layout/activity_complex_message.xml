@@ -9,4 +9,41 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.benjamindomokos.landlordtenant.ComplexMessageActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textType"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etSubject"
+        android:layout_below="@+id/textType"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="52dp"
+        android:hint="Enter Subject of message"
+        android:layout_alignEnd="@+id/textType" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etMessage"
+        android:layout_below="@+id/etSubject"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="33dp"
+        android:hint="Enter Message"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        android:id="@+id/buttonSendComplex"
+        android:layout_below="@+id/etMessage"
+        android:layout_alignStart="@+id/etMessage" />
+
 </RelativeLayout>

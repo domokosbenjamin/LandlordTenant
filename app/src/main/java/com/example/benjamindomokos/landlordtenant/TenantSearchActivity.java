@@ -1,14 +1,18 @@
 package com.example.benjamindomokos.landlordtenant;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -22,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class TenantSearchActivity extends AppCompatActivity {
     List<User> userList = new ArrayList<User>();
@@ -32,9 +37,20 @@ public class TenantSearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tenant_search);
 
+        final Bundle extras = getIntent().getExtras();
+
         Button searchButton = (Button) findViewById(R.id.searchButton);
         final TextView textView   = (TextView) findViewById(R.id.usernameText);
         userListView = (ListView) findViewById(R.id.listView);
+
+        userListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(TenantSearchActivity.this, "You Clicked at " +userList.get(position).getUsername()+" "+extras.getInt("group"), Toast.LENGTH_SHORT).show();
+            }
+
+
+        });
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,5 +113,6 @@ public class TenantSearchActivity extends AppCompatActivity {
 
             return view;
         }
+
     }
 }

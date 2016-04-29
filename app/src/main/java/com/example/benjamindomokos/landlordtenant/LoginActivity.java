@@ -58,36 +58,43 @@ public class LoginActivity extends AppCompatActivity {
                             int userType = registerResponse.getInt("type");
                             int groupId = registerResponse.getInt("gr_id");
                             int id = registerResponse.getInt("id");
-                            Log.d("group  id:", id+" "+groupId);
+                            Log.d("group  id:", id+" "+groupId+" "+userType);
 
                             if(registerSuccess & userIsInGroup){
-                                if(userType == 0) {
-                                    Intent intent = new Intent(LoginActivity.this, LandlordAreaActivity.class);
+                                if (userType == 1){
+
+                                    Intent intent = new Intent(LoginActivity.this, TenantAreaActivity.class);
                                     Bundle extras = new Bundle();
-                                    extras.putInt("id",registerResponse.getInt("id"));
-                                    extras.putInt("group",registerResponse.getInt("gr_id"));
+                                    extras.putInt("id", registerResponse.getInt("id"));
+                                    extras.putInt("group", registerResponse.getInt("gr_id"));
+                                    extras.putString("name", registerResponse.getString("name"));
                                     intent.putExtras(extras);
                                     LoginActivity.this.startActivity(intent);
-                                }else{
-                                    Intent intent = new Intent(LoginActivity.this, TenantAreaActivity.class);
-                                    //intent.putExtra("details",response);
+                                }
+                                else if(userType == 0) {
+                                    Intent intent = new Intent(LoginActivity.this, LandlordAreaActivity.class);
+                                    Bundle extras = new Bundle();
+                                    extras.putInt("id", registerResponse.getInt("id"));
+                                    extras.putInt("group", registerResponse.getInt("gr_id"));
+                                    extras.putString("name", registerResponse.getString("name"));
+                                    intent.putExtras(extras);
                                     LoginActivity.this.startActivity(intent);
                                 }
+
                             }else if(!userIsInGroup) {
                                 if(userType == 0) {
                                     Intent intent = new Intent(LoginActivity.this, CreateGroupActivity.class);
-                                    //intent.putExtra("id",registerResponse.getInt("id"));
-                                    //intent.putExtra("group",registerResponse.getInt("group"));
+
                                     LoginActivity.this.startActivity(intent);
                                 }else{
                                     Intent intent = new Intent(LoginActivity.this, PreTenantAreaActivity.class);
-                                    //intent.putExtra("details",response);
+
                                     LoginActivity.this.startActivity(intent);
 
                                 }
                             }else{
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                builder.setMessage("Failed to register").setNegativeButton("Retry",null)
+                                builder.setMessage("Failed to login").setNegativeButton("Retry",null)
                                         .create().show();
                             }
                         } catch (JSONException ex){
